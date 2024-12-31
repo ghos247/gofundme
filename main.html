@@ -60,10 +60,42 @@
                 
                 <!-- Donation amount input -->
                 <input id="amountInput" type="number" name="amount" class="w-full border border-gray-300 rounded-lg p-4 mb-4" placeholder="Enter amount in USD" required>
-                <form action="upload_image.php" method="POST" enctype="multipart/form-data">
-    <label for="image">Choose image:</label>
-    <input type="file" name="image" id="image" required>
-    <input type="submit" value="Upload Image">
+               <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" id="file-upload" accept="image/*" required />
+        <button type="submit">Upload Image</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/8.1.1/Dropbox-sdk.min.js"></script>
+    <script>
+        const CLIENT_ID = 'YOUR_APP_KEY'; // Replace with your Dropbox App Key
+        const dbx = new Dropbox.Dropbox({ clientId: CLIENT_ID });
+
+        // Handle form submission
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the file to upload
+            const file = document.getElementById('file-upload').files[0];
+
+            if (file) {
+                // Get access token from localStorage
+                const accessToken = localStorage.getItem('access_token');
+                const dbx = new Dropbox.Dropbox({ accessToken });
+
+                // Upload the image to Dropbox
+                dbx.filesUpload({ path: '/images/' + file.name, contents: file })
+                    .then(function(response) {
+                        console.log('File uploaded:', response);
+                        alert('File uploaded successfully!');
+                    })
+                    .catch(function(error) {
+                        console.error('Error uploading file:', error);
+                    });
+            } else {
+                alert('Please select a file to upload!');
+            }
+        });
+    </script>
 </form>
 
             </form>
