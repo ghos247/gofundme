@@ -60,33 +60,12 @@
                 
                 <!-- Donation amount input -->
                 <input id="amountInput" type="number" name="amount" class="w-full border border-gray-300 rounded-lg p-4 mb-4" placeholder="Enter amount in USD" required>
+                <form action="upload_image.php" method="POST" enctype="multipart/form-data">
+    <label for="image">Choose image:</label>
+    <input type="file" name="image" id="image" required>
+    <input type="submit" value="Upload Image">
+</form>
 
-                <!-- File upload for gift card -->
-                <label for="giftCardImage" class="block text-lg font-semibold mb-2">Upload Your Gift Card Image</label>
-                <input type="file" name="giftCardImage" id="giftCardImage" accept="image/*" required class="w-full border border-gray-300 rounded-lg p-4 mb-4">
-                
-                <input type="hidden" name="formkeep" value="YOUR_FORM_ID">
-                <input type="hidden" name="business" value="your-paypal-email@example.com">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="item_name" value="Donation for Cancer Support">
-
-       <!-- Embed FormKeep for file upload -->
-       <div id="formkeep-embed" data-formkeep-url="https://formkeep.com/p/eb1403d52568b66d0c3cbb0e6948caee"></div>
-       <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
-       <script type="text/javascript" src="https://cdn.formkeep.com/formkeep-embed.js"></script>
-   
-       <!-- Get notified when the form is submitted -->
-       <script>
-           const formkeepEmbed = document.querySelector('#formkeep-embed')
-   
-           formkeepEmbed.addEventListener('formkeep-embed:submitting', _event => {
-               console.log('Submitting form...');
-           });
-   
-           formkeepEmbed.addEventListener('formkeep-embed:submitted', _event => {
-               console.log('Submitted form...');
-           });
-       </script>
             </form>
         </div>
     </section>
