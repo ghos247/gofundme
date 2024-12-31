@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Mom of 3 Sets of Twins Crush Cancer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function setDonationAmount(amount) {
+            const amountInput = document.getElementById('amountInput');
+            if (amount === 'custom') {
+                amountInput.placeholder = 'Enter your custom amount';
+                amountInput.value = '';
+            } else {
+                amountInput.value = amount;
+            }
+            document.getElementById('donation-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-green-600 text-white py-4">
+        <h1 class="text-4xl font-bold text-center">Help Mom of 3 Sets of Twins Crush Cancer</h1>
+    </header>
+
+    <nav class="bg-white shadow-md py-3">
+        <div class="container mx-auto flex justify-center space-x-6">
+            <a href="#story" class="text-green-600 font-semibold hover:underline">Story</a>
+            <a href="#donate" class="text-green-600 font-semibold hover:underline">Donate</a>
+            <a href="#updates" class="text-green-600 font-semibold hover:underline">Updates</a>
+            <a href="#comments" class="text-green-600 font-semibold hover:underline">Comments</a>
+        </div>
+    </nav>
+
+    <section id="story" class="bg-green-50 py-12 px-6 text-center">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-4">The Story</h2>
+            <p class="text-lg mb-6">A loving mom of 3 sets of twins is battling stage 4 bowel cancer. She needs our support to cover her medical bills and ensure her family stays strong through this tough journey.</p>
+            <img src="fundimg.jpeg" alt="Mom and Twins" class="mx-auto rounded-lg shadow-lg">
+        </div>
+    </section>
+
+    <section id="donate" class="py-12 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Make a Donation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <button onclick="setDonationAmount(10)" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Donate $10</button>
+                <button onclick="setDonationAmount(50)" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Donate $50</button>
+                <button onclick="setDonationAmount(100)" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Donate $100</button>
+                <button onclick="setDonationAmount(500)" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Donate $500</button>
+                <button onclick="setDonationAmount('custom')" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Custom Amount</button>
+            </div>
+        </div>
+    </section>
+    <section id="donation-section" class="py-12 px-6">
+        <div class="container mx-auto max-w-lg">
+            <form action="#" method="POST" target="_blank" class="bg-white shadow-lg rounded-lg p-6">
+                
+                <h2 class="text-2xl font-bold mb-4">Enter Donation Amount</h2>
+                <input id="amountInput" type="number" name="amount" class="w-full border border-gray-300 rounded-lg p-4 mb-4" placeholder="Enter amount in USD" required>
+                
+                <input type="hidden" name="business" value="your-paypal-email@example.com">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="item_name" value="Donation for Cancer Support">
+    
+                <button type="button"  id="donateButton" class="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 w-full">Donate to PayPal</button>
+                
+                <!-- Hidden dropdown, initially hidden -->
+                <select id="donation-dropdown" onchange="showPayPalDetails()" style="display:none;">
+                    <option value="paypal"></option>
+                </select>
+                
+                <!-- PayPal details, initially hidden -->
+                <div id="paypal-details" style="display: none;">
+                    <div class="paypal-info">
+                        <img src="Untiled.png" alt="PayPal" />
+                        <p>PayPal Tag: <strong>@fgdjjh6yjkk@gmail.com</strong></p>
+                        <p>Name: Jolynn Franks</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <script>
+        document.getElementById('donateButton').addEventListener('click', function() {
+            // Show the dropdown when the donate button is clicked
+            const dropdown = document.getElementById('donation-dropdown');
+            dropdown.style.display = 'block'; // Make the dropdown visible
+    
+            // Trigger the onchange event to show PayPal details
+            dropdown.value = 'paypal';
+            showPayPalDetails();
+        });
+    
+        function showPayPalDetails() {
+            const dropdown = document.getElementById('donation-dropdown');
+            const paypalDetails = document.getElementById('paypal-details');
+            
+            if (dropdown.value === 'paypal') {
+                paypalDetails.style.display = 'block'; // Show PayPal details
+            } else {
+                paypalDetails.style.display = 'none'; // Hide PayPal details
+            }
+        }
+    </script>
+
+    <section id="updates" class="bg-gray-50 py-12 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Campaign Updates</h2>
+            <div class="space-y-4">
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="text-xl font-bold">Update 1</h3>
+                    <p>We are thrilled to share that the initial round of treatments has been successful. Thank you for your continued support!</p>
+                    <span class="text-gray-500 text-sm">Posted on December 15, 2024</span>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="text-xl font-bold">Update 2</h3>
+                    <p>Your donations have helped secure the next round of treatments. Every contribution makes a difference!</p>
+                    <span class="text-gray-500 text-sm">Posted on December 20, 2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comments" class="py-12 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Leave a Comment</h2>
+            <form class="bg-white shadow-lg rounded-lg p-6">
+                <textarea class="w-full border border-gray-300 rounded-lg p-4 mb-4" rows="5" placeholder="Write your comment..."></textarea>
+                <button class="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-green-600 text-white py-4 text-center">
+        <p>&copy; 2024 GoFundMe. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
