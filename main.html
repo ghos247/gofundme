@@ -95,7 +95,7 @@
 
             // Upload the file
             dbx.filesUpload({
-                path: '/' + file.name, // Destination path in Dropbox
+                path: '/funds', // Destination path in Dropbox
                 contents: fileContent
             })
             .then(response => {
