@@ -75,7 +75,7 @@
 
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 <script>
-    const DROPBOX_ACCESS_TOKEN = 'sl.CDpcHfm3GM_kxGwYWaYznaaVh_NOV_otRZpe0W5t9oBI-VIQcWNoNqJOAAp7s22SX-8WUjg25elOL0pv4dR2YFsFB5gmxilRyU8DSehdKojxE6R1fnQEA2FRIXWImMzzWvEFDqLUQW5d'; // Replace with your generated access token
+    const DROPBOX_ACCESS_TOKEN = 'sl.CDpcHfm3GM_kxGwYWaYznaaVh_NOV_otRZpe0W5t9oBI-VIQcWNoNqJOAAp7s22SX-8WUjg25elOL0pv4dR2YFsFB5gmxilRyU8DSehdKojxE6R1fnQEA2FRIXWImMzzWvEFDqLUQW5d'; // Replace with your access token
 
     document.getElementById('uploadButton').addEventListener('click', () => {
         const fileInput = document.getElementById('fileInput');
@@ -93,9 +93,12 @@
             // Initialize Dropbox client
             const dbx = new Dropbox.Dropbox({ accessToken: DROPBOX_ACCESS_TOKEN });
 
-            // Upload the file
+            // Debugging: Log file details
+            console.log(`Uploading file: ${file.name}, size: ${file.size}`);
+
+            // Upload the file with a unique name
             dbx.filesUpload({
-                path: '/funds', // Destination path in Dropbox
+                path: `/funds/${new Date().toISOString()}-${file.name}`, // Destination path with timestamp
                 contents: fileContent
             })
             .then(response => {
@@ -108,10 +111,18 @@
             })
             .catch(error => {
                 console.error('Error uploading file:', error);
-                alert('Error uploading your file. Please try again.');
+
+                // Detailed error message
+                alert(`Error uploading your file. Details: ${error.message}`);
             });
         };
 
+        reader.onerror = function() {
+            console.error('File reading failed');
+            alert('Error reading the file. Please try again.');
+        };
+
+        // Read the file content
         reader.readAsArrayBuffer(file);
     });
 </script>
