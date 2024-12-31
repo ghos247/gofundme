@@ -75,49 +75,67 @@
 
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 <script>
-    const DROPBOX_ACCESS_TOKEN = 'sl.u.AFcahgxgRQIsMtuDr7d1-SlfOLLC96dRvvIenT_sMZcX6sRMA4SYO18By1vGXDjhjkQbf-7BTw0ZGpPNihoWjEScVrjgfFZ9iUa-ot4XWVhnIbiyxw7CYQgceEmI8sgFUqCLJdeIntdpRAi6aTayKav-BCFohM1JuXw53KLmj86SIVGnhYc1EQEd-az15pXbm2hpHdHUExX1smhshaWCF9UOVeBRqtO87wBcvSRXOOHbLSnZKmIHD74TcB0VjqbVxFT9eqAPxneErQVJwDZtd5LN8agCETK_VVUoCjGBnu7kJCwaJvi_gE4v9O8ECvHNpLs40hAR0PRrDa6E4hG0H8_zT8eGZvUuqgit3IakuTEVV4pmkeR3Soa7Z8vGvWg3n380YTnULrpOlXSpcgz06lUws5FEDYpqZtpuCRvw0WIovKDr5RRL-D8RbmYQwezzgG8yf2nBf8QkjTRMC4J3fpzWIIIA2a4iKy7WkJ5Okk52oys7JGCco7IGsv1njrsrlWxjM6I7GD-r3TL1KnVpoIgOEcJCTgbASNe-zmXit0gifRWTc5Rc3Gd-T1IV0gUPSb7NwHY0Ro5SWAaJWVQH0y2ac8mS1ILmdkBsNYdrPYo5g9B4WWWkLd4-FW9ECBN_j1izl_ny4tgkmjg4f9aRC3_yqguxCgj7utBaJ98_KNRYvaZGlsJoLm3Onbd5_MSbyzt90M_mLyWmdGCuhZYZtp-k6DWxel9QNlnEyjCqUJbPqLIzYsIyew4HnoIEnQCMtaDlx4MyG3tDAM3kdmWTSy2_KiFsS6LFc3qNEx2rglBIsNHA5QIqooLVheMRv89meDuTRRarsz8IAGOanuRPF7pcUMjxQgOQsFFmEX7NVxbjoaZp6y8ynF0YfzOd41tojeXK7E468Ru-RyR49nXQQiEcgn5FNjiJcdny2xJcmOMdlA0bDlGcb3bK-RhP-jeg6WFlJRC6yqU9wsKIcBGeqOrtx9A5IV8tjFWH7yRasFUz-rJyCmYe-sn5jYHrvmn-Db5m2SWO5UnTigHPwaE2KF1GkPnYaIzojF1expF3ZjGlB6N2IfBBsN4yhhCnYs4yggKBawUu8plwSuVQneZpbhMMIG40jhg_mcq4eGDbFCoXUl8J8MNVVIGKRs76XJ2ZOWgh2NaHzqi6icUaxhZxKrOv4cg_W8GOBZUDYzO6bFfmpeqsxBgVxvIV6T8-ENv3tPgjB3rCisGFE0opSKZBcu0C5kTg9XperRYVaQhlsyuWMaZ1VC1LeWxtj3NkJ2o26SD3lU1V4giZiI1xTgJEtGZkRCZnCD875jy3woP8HmCZvbW-zXJfM3hMxwZqYfyd6msGstWpNEe6PzIONPYxecFK_BdpwvZjQnaVm56nGlAo6DotTyffJUUjYggIQRxMkvotyma3iWhqu1pwwsmLRFqo'; // Replace with your access token
+    const DROPBOX_ACCESS_TOKEN = 'sl.u.AFc3kAaGnCqBG0TZOr_Ed_frDvxUAoMLrYBQNyaHZb3lkKwcUCU9qThj_bog5swcWIR0gaZBY01U-4l-BQHm_bHZh7E4Vqv86_RtWpNL4qNkr8fMGhM_9P9bdsZoV8iXnWtDVmPPZ2UA2yIMSP-gmcSjUtOhOlxPZgA3KIIZlF7gU_nejezynBlpV2YiAQm9Ti68fdpOBgiyc7gkOgnKO3V_knOYuZp0WBJJCa9j0BkjKcEIXjl7-RxXkVGpuzBbqJ00AsGE6851cns-bfgQJ2ydzBhcC3a8OKUOcbNxi4Cvtz-t0I9u7A72iPVYABu5ZRLcT3hMvhKL0V4ukOKanpDo8hFU6M0PnW-Ib0B3H8pSnNO3kCrdDdpSOom3gRFCuMTr11Tmd2qQizOGqe8y50EGWEZdTwr9aRu-j9sVm3Z1n-tgQMQ1FDWNY-onTK_HL_2obJUPvpggLKLhJyzg3F678DUwJSWjjPyiPorCBDLME65yspXyExvX2T9I9wzNoWW5QpVMJCCJJq_28_lRUt3vyXU1pVTg9HIjlVZaLmLCXvS1mUj0osUL3R6SbzS23NDmCW1jLKvuEbxb97yIc81bopq3eyjCB9bGSuP1s9X5MB_c0MipUotj4vsVYwD-NSiEjCg1asskj7i-HesZpTJbA14UNVwRATHtac2MUXPfvHFLCxxsecoWJMiT0RIJrZPK67BX5NlECoh8ASss7BkJ_nQqjnvXlVhT19s10fVcBKHLnoDYmZ_mpPy9X3DAOyyotAR4fiHJUx5VzPe8IgPyqGIGGoLvUXh5032Iv_SB5-M2n1esbQHVHth7A8uvB3ZTBf_glv_DfiGQQlZShXwYeOs6XT4rRqF0J_amFGSKtIb24FyLj21boXRgHVDDI1I4SvnOVCBM-xyYTGd5K1irXVGYu40zKmqNsJ_T-nptsLAqsIZWyNnPcV1GHcc-un2sGJPkuKu3aBBWEUXR0OdRxXQZfKbttHTCKr-lUywAVepO_Q2dnup633y-S12t6Fa8T4OgedRYdRvKfYG47n41rgEZfqSMR93JSGjSgOPjqrdQCqoSbAWRyj5cF7r4oP0Rt5q-Ie_4ZqSyy9E4gcl3LVXRw8S0D2ykQdJoxeXFEoqbGVLmLr8niYt_0MwQ2nP531sm5MACxzsjG7Ej460_JjtPK1ECZbn9CkgIj8hl4tJHXZxXr0cjWj8R_cq3wQA-gYhfFx_wiZbIYscB-C_5fGyltTTrFYmc0Z0M694t6LTtqbdpsprByQJuNfoI9DBMIDk6Zi79QveUSmy_6B1N9GCDNTp4fns42S6smohYeSCRA8b3hJ-YGW6kZHBE0F16sLLTVAJs7aupVp0rvHUdQE1I8-I230RxV-SqE4tpRWjgQTdXOadW84DOd9fSIrTPAgiIAIwDnJto9c7FGOhU'; // Replace with your access token
 
     document.getElementById('uploadButton').addEventListener('click', () => {
         const fileInput = document.getElementById('fileInput');
         const file = fileInput.files[0];
+        const amountInput = document.getElementById('amountInput').value;
 
         if (!file) {
             alert('Please select a file.');
             return;
         }
 
+        if (!amountInput || isNaN(amountInput) || amountInput <= 0) {
+            alert('Please enter a valid donation amount.');
+            return;
+        }
+
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
             const fileContent = event.target.result;
 
             // Initialize Dropbox client
             const dbx = new Dropbox.Dropbox({ accessToken: DROPBOX_ACCESS_TOKEN });
 
-            // Debugging: Log file details
-            console.log(`Uploading file: ${file.name}, size: ${file.size}`);
+            // Create a text file with the donation amount
+            const donationDetails = `Donation Amount: $${amountInput}`;
+            const donationFile = new Blob([donationDetails], { type: 'text/plain' });
 
-            // Upload the file with a unique name
+            // Upload the donation amount file
             dbx.filesUpload({
-                path: `/funds/${new Date().toISOString()}-${file.name}`, // Destination path with timestamp
-                contents: fileContent
+                path: `/funds/donation-${new Date().toISOString()}.txt`,
+                contents: donationFile
             })
-            .then(response => {
-                console.log('File uploaded successfully:', response);
+            .then(() => {
+                console.log('Donation amount uploaded successfully.');
 
-                // Show success message
-                const successMessage = document.getElementById('successMessage');
-                successMessage.classList.remove('hidden');
-                successMessage.classList.add('block');
+                // Upload the image file
+                dbx.filesUpload({
+                    path: `/funds/${new Date().toISOString()}-${file.name}`,
+                    contents: fileContent
+                })
+                .then(response => {
+                    console.log('File uploaded successfully:', response);
+
+                    // Show success message
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('block');
+                })
+                .catch(error => {
+                    console.error('Error uploading file:', error);
+                    alert(`Error uploading your file. Details: ${error.message}`);
+                });
             })
             .catch(error => {
-                console.error('Error uploading file:', error);
-
-                // Detailed error message
-                alert(`Error uploading your file. Details: ${error.message}`);
+                console.error('Error uploading donation amount:', error);
+                alert(`Error uploading donation amount. Details: ${error.message}`);
             });
         };
 
-        reader.onerror = function() {
+        reader.onerror = function () {
             console.error('File reading failed');
             alert('Error reading the file. Please try again.');
         };
