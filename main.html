@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help Mom of 3 Sets of Twins Crush Cancer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+
     <script>
         function setDonationAmount(amount) {
             const amountInput = document.getElementById('amountInput');
@@ -59,66 +61,62 @@
 
             <!-- Donation amount input -->
             <input id="amountInput" type="number" name="amount" class="w-full border border-gray-300 rounded-lg p-4 mb-4" placeholder="Enter amount in USD" required>
+<!-- File upload for gift card -->
+<label for="giftCardImage" class="block text-lg font-semibold mb-2">Upload Your Gift Card Image</label>
+<input type="file" id="fileInput" accept="image/*" class="mb-4">
+<button id="uploadButton" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 mt-4">
+    Upload
+</button>
 
-            <!-- File upload for gift card -->
-            <label for="giftCardImage" class="block text-lg font-semibold mb-2">Upload Your Gift Card Image</label>
-            <input type="file" name="giftCardImage" id="giftCardImage" accept="image/*" required class="w-full border border-gray-300 rounded-lg p-4 mb-4">
+<!-- Success message -->
+<div id="successMessage" class="hidden text-green-600 font-semibold mt-4">
+    Thank you for donating! Your file has been successfully uploaded.
+</div>
 
-            <!-- Dropbox SDK -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/8.1.1/Dropbox-sdk.min.js"></script>
-            <script>
-                const CLIENT_ID = 'xj1rpi8s7ptrqhx'; // Replace with your Dropbox App Key
-                const dbx = new Dropbox.Dropbox({ clientId: CLIENT_ID });
+<script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+<script>
+    const DROPBOX_ACCESS_TOKEN = 'sl.CDpcHfm3GM_kxGwYWaYznaaVh_NOV_otRZpe0W5t9oBI-VIQcWNoNqJOAAp7s22SX-8WUjg25elOL0pv4dR2YFsFB5gmxilRyU8DSehdKojxE6R1fnQEA2FRIXWImMzzWvEFDqLUQW5d'; // Replace with your generated access token
 
-                // Trigger Dropbox authentication and obtain access token
-                function authenticateDropbox() {
-                    const authUrl = dbx.getAuthenticationUrl('https://ghos247.github.io/gofundme/auth/callback'); // Replace with your redirect URI
-                    window.location.href = authUrl;
-                }
+    document.getElementById('uploadButton').addEventListener('click', () => {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
 
-                // Handle form submission to Dropbox
-                document.getElementById('upload-button').addEventListener('click', function(event) {
-                    event.preventDefault();
+        if (!file) {
+            alert('Please select a file.');
+            return;
+        }
 
-                    // Check if user is authenticated
-                    if (!localStorage.getItem('access_token')) {
-                        authenticateDropbox(); // Authenticate if not authenticated
-                        return;
-                    }
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const fileContent = event.target.result;
 
-                    // Get the file to upload
-                    const file = document.getElementById('giftCardImage').files[0];
-                    const amount = document.getElementById('amountInput').value;
+            // Initialize Dropbox client
+            const dbx = new Dropbox.Dropbox({ accessToken: DROPBOX_ACCESS_TOKEN });
 
-                    if (file) {
-                        const accessToken = localStorage.getItem('access_token');
-                        const dbx = new Dropbox.Dropbox({ accessToken });
+            // Upload the file
+            dbx.filesUpload({
+                path: '/' + file.name, // Destination path in Dropbox
+                contents: fileContent
+            })
+            .then(response => {
+                console.log('File uploaded successfully:', response);
 
-                        // Upload the image to Dropbox
-                        dbx.filesUpload({ path: '/images/' + file.name, contents: file })
-                            .then(function(response) {
-                                console.log('File uploaded:', response);
-                                alert('File uploaded successfully! Thank you for donating!');
-                            })
-                            .catch(function(error) {
-                                console.error('Error uploading file:', error);
-                                alert('Error uploading your file. Please try again.');
-                            });
-                    } else {
-                        alert('Please select a file to upload!');
-                    }
-                });
-            </script>
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('block');
+            })
+            .catch(error => {
+                console.error('Error uploading file:', error);
+                alert('Error uploading your file. Please try again.');
+            });
+        };
 
-            <!-- Submit button -->
-            <button id="upload-button" class="bg-green-600 text-white py-4 px-8 rounded-lg hover:bg-green-700 mt-4 w-full">
-                Upload and Donate
-            </button>
+        reader.readAsArrayBuffer(file);
+    });
+</script>
 
-            <div id="success-message" class="hidden text-center text-lg text-green-600 mt-4">
-                Thank you for your generous donation! Your file has been successfully uploaded.
-            </div>
-        </div>
+
     </section>
 
     <footer class="bg-green-600 text-white py-4 text-center">
